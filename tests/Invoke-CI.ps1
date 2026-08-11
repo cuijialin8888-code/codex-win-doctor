@@ -7,7 +7,15 @@ $ErrorActionPreference = 'Stop'
 
 $projectRoot = Split-Path -Parent $PSScriptRoot
 $parseIssues = New-Object System.Collections.Generic.List[string]
-foreach ($file in Get-ChildItem -LiteralPath $projectRoot -Recurse -Include '*.ps1', '*.psd1') {
+$powerShellFiles = @(
+    Get-Item -LiteralPath (Join-Path -Path $projectRoot -ChildPath 'codex-doctor.ps1')
+    Get-Item -LiteralPath (Join-Path -Path $projectRoot -ChildPath '.psscriptanalyzer.psd1')
+    foreach ($directory in @('src', 'tests')) {
+        Get-ChildItem -LiteralPath (Join-Path -Path $projectRoot -ChildPath $directory) -Recurse -File |
+            Where-Object { $_.Extension -in @('.ps1', '.psd1') }
+    }
+)
+foreach ($file in $powerShellFiles) {
     $tokens = $null
     $errors = $null
     [System.Management.Automation.Language.Parser]::ParseFile($file.FullName, [ref]$tokens, [ref]$errors) | Out-Null
@@ -36,7 +44,16 @@ if ($result.FailedCount -gt 0) {
 $invokeAnalyzer = Get-Command -Name 'Invoke-ScriptAnalyzer' -ErrorAction SilentlyContinue
 if ($null -ne $invokeAnalyzer) {
     $settings = Join-Path -Path $projectRoot -ChildPath '.psscriptanalyzer.psd1'
-    $findings = @(Invoke-ScriptAnalyzer -Path $projectRoot -Recurse -Settings $settings)
+    $analysisTargets = @(
+        (Join-Path -Path $projectRoot -ChildPath 'codex-doctor.ps1')
+        (Join-Path -Path $projectRoot -ChildPath 'src')
+        (Join-Path -Path $projectRoot -ChildPath 'tests')
+    )
+    $findings = @(
+        foreach ($target in $analysisTargets) {
+            Invoke-ScriptAnalyzer -Path $target -Recurse -Settings $settings
+        }
+    )
     if ($findings.Count -gt 0) {
         $findings | Format-Table -AutoSize
         throw ('PSScriptAnalyzer reported {0} finding(s).' -f $findings.Count)
