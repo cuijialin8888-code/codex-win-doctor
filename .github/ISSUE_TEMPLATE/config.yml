@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security vulnerability
+    url: https://github.com/cuijialin8888-code/codex-win-doctor/security/advisories/new
+    about: Report vulnerabilities privately. Do not include secrets in a public issue.
+  - name: Official OpenAI Codex documentation
+    url: https://learn.chatgpt.com/docs/codex
+    about: Check current official product guidance before changing a managed system.

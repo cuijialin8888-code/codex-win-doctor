@@ -1,0 +1,65 @@
+name: Bug report
+description: Report a reproducible problem in Codex Windows Doctor itself.
+title: '[Bug]: '
+labels: ['bug']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for the report. **DO NOT POST API KEYS, TOKENS, COOKIES, CREDENTIALS, OR UNREVIEWED AUTH FILES.** Review every report before submitting it.
+  - type: input
+    id: doctor-version
+    attributes:
+      label: Codex Windows Doctor version
+      placeholder: 0.1.0
+    validations:
+      required: true
+  - type: input
+    id: windows-version
+    attributes:
+      label: Windows version and build
+      placeholder: Windows 11 25H2, build 26200
+    validations:
+      required: true
+  - type: input
+    id: codex-version
+    attributes:
+      label: Codex version
+      description: CLI and/or desktop version, if detected. Do not include credentials.
+    validations:
+      required: false
+  - type: input
+    id: powershell-version
+    attributes:
+      label: PowerShell version
+      placeholder: PowerShell 7.6.0 or Windows PowerShell 5.1
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: Include the exact redacted error and the command you ran.
+    validations:
+      required: true
+  - type: textarea
+    id: report
+    attributes:
+      label: Reviewed, redacted doctor report
+      description: Generate with `.\codex-doctor.ps1 -IssueReport`. Remove anything you do not want public.
+      render: markdown
+    validations:
+      required: false
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety confirmation
+      options:
+        - label: I reviewed the report and removed API keys, tokens, cookies, credentials, and unrelated private data.
+          required: true

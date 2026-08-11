@@ -1,0 +1,33 @@
+name: Feature request
+description: Propose a bounded diagnostic or reporting improvement.
+title: '[Feature]: '
+labels: ['enhancement']
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem to solve
+      description: Describe a real Windows Codex diagnostic gap, not only a desired implementation.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence or references
+      description: Prefer official OpenAI/Microsoft documentation or multiple reproducible public cases.
+    validations:
+      required: false
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed diagnostic behavior
+      description: Explain PASS/WARN/FAIL/INFO/UNKNOWN semantics and what non-sensitive evidence is needed.
+    validations:
+      required: true
+  - type: checkboxes
+    id: boundaries
+    attributes:
+      label: Safety boundaries
+      options:
+        - label: The proposal can remain local, read-only, non-elevated, and privacy-safe by default.
+          required: true

@@ -1,0 +1,48 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: windows-latest
+    steps:
+      - name: Check out tagged source
+        uses: actions/checkout@v4
+
+      - name: Verify version and build release archive
+        shell: pwsh
+        run: |
+          $version = (Get-Content .\VERSION -Raw).Trim()
+          if ($env:GITHUB_REF_NAME -ne "v$version") {
+            throw "Tag $env:GITHUB_REF_NAME does not match VERSION $version"
+          }
+
+          $stage = Join-Path $env:RUNNER_TEMP "codex-win-doctor-$version"
+          $dist = Join-Path (Get-Location) 'dist'
+          New-Item -ItemType Directory -Path $stage, $dist -Force | Out-Null
+          foreach ($item in @('codex-doctor.ps1', 'src', 'docs', 'README.md', 'README.zh-CN.md', 'LICENSE', 'SECURITY.md', 'CHANGELOG.md', 'VERSION')) {
+            Copy-Item -LiteralPath (Join-Path (Get-Location) $item) -Destination $stage -Recurse
+          }
+          Compress-Archive -LiteralPath $stage -DestinationPath (Join-Path $dist "codex-win-doctor-$version.zip") -Force
+
+      - name: Create or update GitHub Release
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $tag = $env:GITHUB_REF_NAME
+          $version = (Get-Content .\VERSION -Raw).Trim()
+          $asset = ".\dist\codex-win-doctor-$version.zip"
+          gh release view $tag *> $null
+          if ($LASTEXITCODE -eq 0) {
+            gh release upload $tag $asset --clobber
+          }
+          else {
+            gh release create $tag $asset --verify-tag --title "Codex Windows Doctor v$version" --notes-file ".\.github\release-notes\v$version.md"
+          }

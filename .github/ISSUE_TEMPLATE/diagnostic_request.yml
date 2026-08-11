@@ -1,0 +1,51 @@
+name: Diagnostic help request
+description: Ask for help interpreting a redacted Codex Windows Doctor finding.
+title: '[Diagnostic]: '
+labels: ['diagnostic']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This project is unofficial. **DO NOT POST API KEYS OR TOKENS.** The doctor does not automatically create or upload this issue.
+  - type: input
+    id: check-id
+    attributes:
+      label: Check id
+      placeholder: tools.ripgrep
+    validations:
+      required: true
+  - type: dropdown
+    id: status
+    attributes:
+      label: Reported status
+      options: [PASS, WARN, FAIL, INFO, UNKNOWN]
+    validations:
+      required: true
+  - type: textarea
+    id: goal
+    attributes:
+      label: What were you trying to do?
+    validations:
+      required: true
+  - type: textarea
+    id: report
+    attributes:
+      label: Relevant reviewed report section
+      description: Include only the relevant redacted section, not auth/configuration file contents.
+      render: markdown
+    validations:
+      required: true
+  - type: textarea
+    id: attempts
+    attributes:
+      label: Safe steps already tried
+      description: Distinguish official guidance from community workarounds.
+    validations:
+      required: false
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety confirmation
+      options:
+        - label: I reviewed this content and it contains no API keys, tokens, cookies, credentials, or private file contents.
+          required: true

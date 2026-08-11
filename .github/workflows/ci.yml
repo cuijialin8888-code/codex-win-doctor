@@ -1,0 +1,59 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  windows-powershell-51:
+    name: Windows PowerShell 5.1
+    runs-on: windows-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Run syntax validation and tests
+        shell: powershell
+        run: |
+          $moduleRoot = Join-Path $env:RUNNER_TEMP 'DoctorModules'
+          Save-Module -Name Pester -RequiredVersion 6.0.1 -Repository PSGallery -Path $moduleRoot -Force -AcceptLicense
+          Import-Module (Join-Path $moduleRoot 'Pester\6.0.1\Pester.psd1') -Force
+          .\tests\Invoke-CI.ps1
+
+      - name: Validate JSON and issue report entry points
+        shell: powershell
+        run: |
+          $json = .\codex-doctor.ps1 -Json
+          $report = $json | ConvertFrom-Json
+          if ($report.tool.version -ne (Get-Content .\VERSION -Raw).Trim()) { throw 'VERSION mismatch' }
+          $markdown = .\codex-doctor.ps1 -IssueReport
+          if ($markdown -notmatch '# Codex Windows Doctor Report') { throw 'Issue report smoke test failed' }
+
+  powershell-7:
+    name: PowerShell 7 and static analysis
+    runs-on: windows-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Run syntax validation, tests, and PSScriptAnalyzer
+        shell: pwsh
+        run: |
+          $moduleRoot = Join-Path $env:RUNNER_TEMP 'DoctorModules'
+          Save-Module -Name Pester -RequiredVersion 6.0.1 -Repository PSGallery -Path $moduleRoot -Force -AcceptLicense
+          Save-Module -Name PSScriptAnalyzer -RequiredVersion 1.25.0 -Repository PSGallery -Path $moduleRoot -Force -AcceptLicense
+          Import-Module (Join-Path $moduleRoot 'Pester\6.0.1\Pester.psd1') -Force
+          Import-Module (Join-Path $moduleRoot 'PSScriptAnalyzer\1.25.0\PSScriptAnalyzer.psd1') -Force
+          .\tests\Invoke-CI.ps1
+
+      - name: Validate JSON and issue report entry points
+        shell: pwsh
+        run: |
+          $json = .\codex-doctor.ps1 -Json
+          $report = $json | ConvertFrom-Json
+          if ($report.tool.version -ne (Get-Content .\VERSION -Raw).Trim()) { throw 'VERSION mismatch' }
+          $markdown = .\codex-doctor.ps1 -IssueReport
+          if ($markdown -notmatch '# Codex Windows Doctor Report') { throw 'Issue report smoke test failed' }
