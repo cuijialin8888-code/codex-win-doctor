@@ -159,6 +159,8 @@ Only v0.1 features are implemented today. The project intentionally does not inc
 
 Bug reports, diagnostic edge cases, documentation fixes, and narrowly scoped checks are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md), the [Code of Conduct](CODE_OF_CONDUCT.md), and the [security policy](SECURITY.md).
 
+Maintainers can use the [maintenance checklist](docs/maintenance.md) for compatibility reviews and releases.
+
 ## Disclaimer
 
 This project is an independent community project and is not affiliated with or endorsed by OpenAI. “OpenAI” and “Codex” are used only to describe compatibility and the environment being diagnosed. Verify recommendations against current official documentation before changing a managed or production system.
