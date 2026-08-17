@@ -26,3 +26,7 @@ Keep maintenance evidence-driven and small. This project is a read-only diagnost
 
 - Preserve read-only behavior, no telemetry, no API-key requirement, and no automatic PATH, registry, WSL, AppX/MSIX, or policy changes.
 - Do not create activity-only commits, artificial issues, or unverified compatibility claims.
+
+## Review log
+
+- 2026-08-17: verified the public `main` branch, recent GitHub Actions runs, and open issue/PR queues; no follow-up was required.
