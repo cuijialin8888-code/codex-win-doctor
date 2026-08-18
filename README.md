@@ -39,10 +39,10 @@ cd codex-win-doctor
 
 ### Option B — Download the release
 
-[Open the latest release](https://github.com/cuijialin8888-code/codex-win-doctor/releases/latest), download its ZIP asset (currently `codex-win-doctor-0.1.0.zip`), and extract it. Open PowerShell in the extracted `codex-win-doctor-0.1.0` folder, then run:
+[Open the latest release](https://github.com/cuijialin8888-code/codex-win-doctor/releases/latest), download its ZIP asset, and extract it. Open PowerShell in the extracted versioned folder, then run:
 
 ```powershell
-cd .\codex-win-doctor-0.1.0
+cd .\codex-win-doctor-*
 .\codex-doctor.ps1
 ```
 
