@@ -4,6 +4,18 @@ All notable changes to this project are documented here. The format is based on 
 
 ## [Unreleased]
 
+### Added
+
+- Repository-level maintainer instructions for safe, PowerShell 5.1-compatible contributions.
+
+### Changed
+
+- Pin GitHub Actions dependencies to immutable commits and add grouped monthly update checks.
+
+### Fixed
+
+- Redact standalone classic, OAuth, user, server, refresh, and fine-grained GitHub token formats in every renderer.
+
 ## [0.1.0] - 2026-08-11
 
 ### Added

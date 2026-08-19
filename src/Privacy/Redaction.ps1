@@ -40,6 +40,8 @@ function ConvertTo-DoctorSafeText {
         })
     $safe = [regex]::Replace($safe, '(?i)([?&](?:api_key|access_token|refresh_token)=)[^&\s]+', '$1[REDACTED]')
     $safe = [regex]::Replace($safe, '\bsk-[A-Za-z0-9_-]{8,}\b', '[REDACTED_SECRET]')
+    $safe = [regex]::Replace($safe, '(?i)\bgh[pousr]_[A-Za-z0-9]{8,}\b', '[REDACTED_GITHUB_TOKEN]')
+    $safe = [regex]::Replace($safe, '(?i)\bgithub_pat_[A-Za-z0-9_]{8,}\b', '[REDACTED_GITHUB_TOKEN]')
     $safe = [regex]::Replace($safe, '\b[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,}\b', '[REDACTED_JWT]')
 
     $userProfile = [Environment]::GetFolderPath('UserProfile')
