@@ -14,6 +14,12 @@ $redactionCases = @(
     @{ Name = 'OpenAI API key'; Text = 'OPENAI_API_KEY=sk-test-THIS_IS_NOT_REAL'; Secret = 'sk-test-THIS_IS_NOT_REAL'; Context = 'OPENAI_API_KEY=\[REDACTED\]' }
     @{ Name = 'GitHub classic token'; Text = 'GITHUB_TOKEN=ghp_FAKE_TOKEN_123456789'; Secret = 'ghp_FAKE_TOKEN_123456789'; Context = 'GITHUB_TOKEN=\[REDACTED\]' }
     @{ Name = 'GitHub fine-grained token'; Text = 'GH_TOKEN=github_pat_FAKE_TOKEN_123456789'; Secret = 'github_pat_FAKE_TOKEN_123456789'; Context = 'GH_TOKEN=\[REDACTED\]' }
+    @{ Name = 'standalone GitHub classic token'; Text = 'probe: ghp_FAKE1234567890'; Secret = 'ghp_FAKE1234567890'; Context = 'probe:\s+\[REDACTED_GITHUB_TOKEN\]' }
+    @{ Name = 'standalone GitHub OAuth token'; Text = 'probe: gho_FAKE1234567890'; Secret = 'gho_FAKE1234567890'; Context = 'probe:\s+\[REDACTED_GITHUB_TOKEN\]' }
+    @{ Name = 'standalone GitHub user token'; Text = 'probe: ghu_FAKE1234567890'; Secret = 'ghu_FAKE1234567890'; Context = 'probe:\s+\[REDACTED_GITHUB_TOKEN\]' }
+    @{ Name = 'standalone GitHub server token'; Text = 'probe: ghs_FAKE1234567890'; Secret = 'ghs_FAKE1234567890'; Context = 'probe:\s+\[REDACTED_GITHUB_TOKEN\]' }
+    @{ Name = 'standalone GitHub refresh token'; Text = 'probe: ghr_FAKE1234567890'; Secret = 'ghr_FAKE1234567890'; Context = 'probe:\s+\[REDACTED_GITHUB_TOKEN\]' }
+    @{ Name = 'standalone GitHub fine-grained token'; Text = 'probe: github_pat_FAKE_TOKEN_123456789'; Secret = 'github_pat_FAKE_TOKEN_123456789'; Context = 'probe:\s+\[REDACTED_GITHUB_TOKEN\]' }
     @{ Name = 'access token'; Text = 'access_token=FAKE_ACCESS_TOKEN_SECRET'; Secret = 'FAKE_ACCESS_TOKEN_SECRET'; Context = 'access_token=\[REDACTED\]' }
     @{ Name = 'refresh token'; Text = 'refresh_token=FAKE_REFRESH_TOKEN_SECRET'; Secret = 'FAKE_REFRESH_TOKEN_SECRET'; Context = 'refresh_token=\[REDACTED\]' }
 )

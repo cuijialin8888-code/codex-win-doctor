@@ -1,9 +1,25 @@
-# Codex Windows Doctor
+<p align="center">
+  <img src="docs/assets/hero.svg" alt="Codex Windows Doctor — read-only Windows diagnostics" width="100%">
+</p>
 
-[![CI](https://github.com/cuijialin8888-code/codex-win-doctor/actions/workflows/ci.yml/badge.svg)](https://github.com/cuijialin8888-code/codex-win-doctor/actions/workflows/ci.yml)
-[![Release](https://img.shields.io/github/v/release/cuijialin8888-code/codex-win-doctor)](https://github.com/cuijialin8888-code/codex-win-doctor/releases)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![PowerShell](https://img.shields.io/badge/PowerShell-5.1%20%7C%207%2B-5391FE.svg)](https://learn.microsoft.com/powershell/)
+<h1 align="center">Codex Windows Doctor</h1>
+
+<p align="center"><strong>Read-only diagnostics for Windows, PowerShell, Codex, PATH, WSL, and the developer tools around them.</strong></p>
+
+<p align="center">
+  <a href="https://github.com/cuijialin8888-code/codex-win-doctor/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/cuijialin8888-code/codex-win-doctor/actions/workflows/ci.yml/badge.svg"></a>
+  <a href="https://github.com/cuijialin8888-code/codex-win-doctor/releases"><img alt="Release" src="https://img.shields.io/github/v/release/cuijialin8888-code/codex-win-doctor"></a>
+  <a href="https://learn.microsoft.com/powershell/"><img alt="PowerShell 5.1 and 7+" src="https://img.shields.io/badge/PowerShell-5.1%20%7C%207%2B-5391FE.svg"></a>
+  <a href="LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/License-MIT-blue.svg"></a>
+  <a href="https://github.com/cuijialin8888-code/codex-win-doctor/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/cuijialin8888-code/codex-win-doctor?style=flat"></a>
+</p>
+
+<p align="center">
+  <a href="#quick-start">Quick start</a> ·
+  <a href="#what-it-checks">Checks</a> ·
+  <a href="#privacy-and-safety">Safety</a> ·
+  <a href="README.zh-CN.md">中文</a>
+</p>
 
 Codex behaving strangely on Windows? Codex Windows Doctor is a read-only diagnostic tool for your Windows, PowerShell, Codex, PATH, WSL, and related developer environment. It shows what is healthy, suspicious, or actually broken—and what to check next.
 
@@ -12,6 +28,10 @@ It is an unofficial diagnostics and troubleshooting toolkit for OpenAI Codex on 
 **This project is an independent community project and is not affiliated with or endorsed by OpenAI.**
 
 [中文说明](README.zh-CN.md)
+
+| Diagnose before changing | Safe to run | Useful evidence |
+| --- | --- | --- |
+| Separates missing, broken, conflicting, and optional tools | Local, no telemetry, no elevation, no automatic fixes | Console, JSON, and reviewable Markdown reports |
 
 ### It can help when...
 
@@ -105,7 +125,7 @@ Organization-managed policy can override process settings. See [PowerShell comma
 
 The trust promises above apply to every normal run: `codex-doctor.ps1` makes no network requests; it does not read authentication/configuration contents or upload API keys and tokens; every built-in renderer redacts user-profile paths and secret-like values. Disposable write probes are deleted immediately and cleanup is tested.
 
-Redaction recognizes common OpenAI/GitHub token names, bearer headers, API-key query parameters, JWT-like strings, and OpenAI-style secret prefixes. It is defense in depth, not a guarantee: **always review a report before posting it publicly**.
+Redaction recognizes common secret names, every documented GitHub token prefix family, bearer headers, API-key query parameters, JWT-like strings, and OpenAI-style secret prefixes. It is defense in depth, not a guarantee: **always review a report before posting it publicly**.
 
 See [SECURITY.md](SECURITY.md) for the security policy.
 

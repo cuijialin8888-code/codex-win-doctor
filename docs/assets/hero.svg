@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img" aria-labelledby="title desc">
+  <title id="title">Codex Windows Doctor</title>
+  <desc id="desc">A Windows diagnostic dashboard with a shield check on a deep blue background.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#07152b"/>
+      <stop offset="0.52" stop-color="#123b73"/>
+      <stop offset="1" stop-color="#0f766e"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.22" cy="0.24" r="0.78">
+      <stop offset="0" stop-color="#60a5fa" stop-opacity="0.38"/>
+      <stop offset="1" stop-color="#60a5fa" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" fill="none" stroke="#ffffff" stroke-opacity="0.055"/>
+    </pattern>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#020617" flood-opacity="0.36"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="360" rx="28" fill="url(#background)"/>
+  <rect width="1200" height="360" rx="28" fill="url(#glow)"/>
+  <rect width="1200" height="360" rx="28" fill="url(#grid)"/>
+
+  <g transform="translate(74 61)" filter="url(#shadow)">
+    <rect width="238" height="238" rx="38" fill="#0f172a" fill-opacity="0.74" stroke="#93c5fd" stroke-opacity="0.5"/>
+    <g fill="#60a5fa" opacity="0.95">
+      <rect x="43" y="50" width="66" height="66" rx="7"/>
+      <rect x="119" y="50" width="76" height="66" rx="7"/>
+      <rect x="43" y="126" width="66" height="66" rx="7"/>
+      <rect x="119" y="126" width="76" height="66" rx="7"/>
+    </g>
+    <circle cx="185" cy="190" r="34" fill="#14b8a6" stroke="#ecfeff" stroke-width="4"/>
+    <path d="m169 190 11 11 22-27" fill="none" stroke="#ecfeff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M45 216h64" stroke="#bfdbfe" stroke-width="6" stroke-linecap="round" opacity="0.85"/>
+  </g>
+
+  <g fill="#f8fafc" font-family="Inter, Segoe UI, Arial, sans-serif">
+    <text x="365" y="125" font-size="52" font-weight="750" letter-spacing="0.4">Codex Windows Doctor</text>
+    <text x="368" y="171" font-size="22" fill="#dbeafe">Diagnose first. Change nothing automatically.</text>
+    <text x="368" y="207" font-size="17" fill="#cbd5e1">Windows · PowerShell · Codex · PATH · WSL · developer tools</text>
+  </g>
+
+  <g transform="translate(368 244)" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="1">
+    <g>
+      <rect width="112" height="38" rx="19" fill="#ffffff" fill-opacity="0.1" stroke="#93c5fd" stroke-opacity="0.6"/>
+      <text x="56" y="24" text-anchor="middle" fill="#dbeafe">READ-ONLY</text>
+    </g>
+    <g transform="translate(126)">
+      <rect width="110" height="38" rx="19" fill="#ffffff" fill-opacity="0.1" stroke="#5eead4" stroke-opacity="0.6"/>
+      <text x="55" y="24" text-anchor="middle" fill="#ccfbf1">LOCAL</text>
+    </g>
+    <g transform="translate(250)">
+      <rect width="156" height="38" rx="19" fill="#ffffff" fill-opacity="0.1" stroke="#bfdbfe" stroke-opacity="0.6"/>
+      <text x="78" y="24" text-anchor="middle" fill="#dbeafe">NO TELEMETRY</text>
+    </g>
+    <g transform="translate(420)">
+      <rect width="178" height="38" rx="19" fill="#ffffff" fill-opacity="0.1" stroke="#a7f3d0" stroke-opacity="0.6"/>
+      <text x="89" y="24" text-anchor="middle" fill="#d1fae5">PS 5.1 + 7 READY</text>
+    </g>
+  </g>
+</svg>

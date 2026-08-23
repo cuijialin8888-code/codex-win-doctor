@@ -1,9 +1,25 @@
-# Codex Windows Doctor
+<p align="center">
+  <img src="docs/assets/hero.svg" alt="Codex Windows Doctor——只读 Windows 环境诊断" width="100%">
+</p>
 
-[![CI](https://github.com/cuijialin8888-code/codex-win-doctor/actions/workflows/ci.yml/badge.svg)](https://github.com/cuijialin8888-code/codex-win-doctor/actions/workflows/ci.yml)
-[![Release](https://img.shields.io/github/v/release/cuijialin8888-code/codex-win-doctor)](https://github.com/cuijialin8888-code/codex-win-doctor/releases)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![PowerShell](https://img.shields.io/badge/PowerShell-5.1%20%7C%207%2B-5391FE.svg)](https://learn.microsoft.com/powershell/)
+<h1 align="center">Codex Windows Doctor</h1>
+
+<p align="center"><strong>面向 Windows、PowerShell、Codex、PATH、WSL 与周边开发工具的只读诊断工具。</strong></p>
+
+<p align="center">
+  <a href="https://github.com/cuijialin8888-code/codex-win-doctor/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/cuijialin8888-code/codex-win-doctor/actions/workflows/ci.yml/badge.svg"></a>
+  <a href="https://github.com/cuijialin8888-code/codex-win-doctor/releases"><img alt="Release" src="https://img.shields.io/github/v/release/cuijialin8888-code/codex-win-doctor"></a>
+  <a href="https://learn.microsoft.com/powershell/"><img alt="PowerShell 5.1 and 7+" src="https://img.shields.io/badge/PowerShell-5.1%20%7C%207%2B-5391FE.svg"></a>
+  <a href="LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/License-MIT-blue.svg"></a>
+  <a href="https://github.com/cuijialin8888-code/codex-win-doctor/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/cuijialin8888-code/codex-win-doctor?style=flat"></a>
+</p>
+
+<p align="center">
+  <a href="#快速开始">快速开始</a> ·
+  <a href="#检查内容">检查范围</a> ·
+  <a href="#隐私与安全">安全边界</a> ·
+  <a href="README.md">English</a>
+</p>
 
 Codex 在 Windows 上运行异常，却不知道问题出在哪一环？Codex Windows Doctor 是一个只读诊断工具，检查 Windows、PowerShell、Codex、PATH、WSL 及相关开发环境，并说明哪些正常、哪些可疑、哪些确实失败，以及下一步该查什么。
 
@@ -12,6 +28,10 @@ Codex 在 Windows 上运行异常，却不知道问题出在哪一环？Codex Wi
 **This project is an independent community project and is not affiliated with or endorsed by OpenAI.**
 
 [English README](README.md)
+
+| 先诊断再修改 | 默认安全 | 证据可复核 |
+| --- | --- | --- |
+| 区分缺失、损坏、冲突与可选工具 | 本地运行、无遥测、不提权、不自动修复 | 输出 Console、JSON 与可审查 Markdown |
 
 ### 适用的常见情况
 
@@ -105,7 +125,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\codex-doctor.ps1
 
 上述信任边界适用于每次正常运行：`codex-doctor.ps1` 不发起网络请求，不读取认证/配置文件内容，不上传 API Key 或 Token；内置输出会脱敏用户目录和疑似密钥。写权限测试使用一次性文件，测试后立即删除，并验证是否清理成功。
 
-脱敏层识别常见 OpenAI/GitHub Token 名称、Bearer Header、API Key 查询参数、JWT 形态和 OpenAI 风格密钥前缀。但自动脱敏不是绝对保证：**公开粘贴报告前仍应人工检查。**
+脱敏层识别常见密钥名称、GitHub 官方各类 Token 前缀、Bearer Header、API Key 查询参数、JWT 形态和 OpenAI 风格密钥前缀。但自动脱敏不是绝对保证：**公开粘贴报告前仍应人工检查。**
 
 详见 [SECURITY.md](SECURITY.md)。
 
