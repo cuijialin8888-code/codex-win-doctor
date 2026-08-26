@@ -47,6 +47,8 @@ Codex 在 Windows 上运行异常，却不知道问题出在哪一环？Codex Wi
 - 无 telemetry，不需要 OpenAI API Key。
 - 不自动修改 PATH、注册表、WSL 或 AppX/MSIX。
 
+公开 CI 当前覆盖 Windows PowerShell 5.1 和 PowerShell 7，并执行语法验证、测试、静态分析和报告入口 smoke test。
+
 ## 快速开始
 
 ### 方式 A — 使用 Git clone
