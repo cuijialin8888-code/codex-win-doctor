@@ -47,6 +47,8 @@ It is an unofficial diagnostics and troubleshooting toolkit for OpenAI Codex on 
 - No telemetry and no OpenAI API key required.
 - No automatic PATH, registry, WSL, or AppX/MSIX changes.
 
+The public CI currently exercises both Windows PowerShell 5.1 and PowerShell 7, including syntax validation, tests, static analysis, and report smoke tests.
+
 ## Quick start
 
 ### Option A — Clone with Git
