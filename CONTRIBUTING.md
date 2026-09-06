@@ -41,6 +41,12 @@ Check ids are lowercase dotted identifiers and should remain stable after releas
 
 Never add real API keys, tokens, cookies, auth files, private paths, or unredacted user reports to a fixture. Use explicit fake values such as `sk-test-THIS_IS_NOT_REAL`.
 
+## Routine maintenance
+
+- Keep workflow action references immutable and verify the Windows PowerShell 5.1/7 CI result on public `main` after a change.
+- Preserve local, bounded, read-only diagnostics: do not add elevation, package installation, telemetry, automatic system changes, or credential-content reads.
+- Treat `UNKNOWN` as an evidence limit rather than a fault, and retain privacy redaction coverage whenever report paths change.
+
 ## Issues and pull requests
 
 Before opening an issue, search existing issues and include the doctor version, Windows/PowerShell/Codex versions, and a reviewed redacted report. **Do not post API keys or tokens.**
