@@ -30,3 +30,4 @@ Keep maintenance evidence-driven and small. This project is a read-only diagnost
 ## Review log
 
 - 2026-08-17: verified the public `main` branch, recent GitHub Actions runs, and open issue/PR queues; no follow-up was required.
+- 2026-09-12: reviewed public `main`, open Issues/PRs, and recent Actions; no open Issues/PRs were present, and the latest main-branch CI run (`34034505948`) completed successfully.
