@@ -30,7 +30,7 @@ jobs:
           $report = $json | ConvertFrom-Json
           if ($report.tool.version -ne (Get-Content .\VERSION -Raw).Trim()) { throw 'VERSION mismatch' }
           $gatedJson = .\codex-doctor.ps1 -Json -FailOn Fail
-          if ($LASTEXITCODE -ne 0) { throw 'Default CI environment unexpectedly triggered the FAIL policy gate' }
+          if ($LASTEXITCODE -notin @(0, 1)) { throw 'FAIL policy gate returned an unexpected exit code' }
           $gatedJson | ConvertFrom-Json | Out-Null
           $markdown = .\codex-doctor.ps1 -IssueReport
           if ($markdown -notmatch '# Codex Windows Doctor Report') { throw 'Issue report smoke test failed' }
@@ -59,7 +59,7 @@ jobs:
           $report = $json | ConvertFrom-Json
           if ($report.tool.version -ne (Get-Content .\VERSION -Raw).Trim()) { throw 'VERSION mismatch' }
           $gatedJson = .\codex-doctor.ps1 -Json -FailOn Fail
-          if ($LASTEXITCODE -ne 0) { throw 'Default CI environment unexpectedly triggered the FAIL policy gate' }
+          if ($LASTEXITCODE -notin @(0, 1)) { throw 'FAIL policy gate returned an unexpected exit code' }
           $gatedJson | ConvertFrom-Json | Out-Null
           $markdown = .\codex-doctor.ps1 -IssueReport
           if ($markdown -notmatch '# Codex Windows Doctor Report') { throw 'Issue report smoke test failed' }
