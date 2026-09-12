@@ -8,6 +8,10 @@ param(
     [switch]$IssueReport,
 
     [Parameter(Mandatory = $false)]
+    [ValidateSet('None', 'Fail', 'Warn', 'Unknown')]
+    [string]$FailOn = 'None',
+
+    [Parameter(Mandatory = $false)]
     [ValidateNotNullOrEmpty()]
     [string]$Output
 )
@@ -76,4 +80,13 @@ if ($Output) {
 }
 else {
     Write-Output $rendered
+}
+
+$gateFailures = @(Get-DoctorGateFailure -Checks $report.checks -FailOn $FailOn)
+if ($gateFailures.Count -gt 0) {
+    $statuses = @($gateFailures | ForEach-Object { [string]$_.status } | Sort-Object -Unique)
+    $message = 'Diagnostic policy gate triggered at {0}: {1} check(s) ({2}).' -f `
+        $FailOn, $gateFailures.Count, ($statuses -join ', ')
+    [Console]::Error.WriteLine((ConvertTo-DoctorSafeText -Text $message))
+    exit 1
 }

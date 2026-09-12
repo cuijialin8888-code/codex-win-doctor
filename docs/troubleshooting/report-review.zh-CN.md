@@ -16,6 +16,10 @@ Codex Windows Doctor 尽量让诊断在本地完成，但报告仍可能包含�
 4. 确认没有 API Key、Token、cookie、credential、Authorization Header、私有 URL 或认证/配置文件内容。
 5. 完成人工审阅后，再分享精简后的报告。
 
+## 自动化验收门槛
+
+只有本地脚本或 CI 需要明确退出码策略时才使用 `-FailOn Fail`、`-FailOn Warn` 或 `-FailOn Unknown`。`Fail` 仅对 `FAIL` 触发；`Warn` 包含 `WARN` 和 `FAIL`；`Unknown` 包含 `UNKNOWN`、`WARN` 和 `FAIL`。默认 `None` 保持为只报告模式。门槛不会额外执行命令、修复 Windows 设置或上传报告。
+
 ## 审阅清单
 
 - [ ] 没有密钥、cookie、Bearer 值或 credential 内容。

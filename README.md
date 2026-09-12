@@ -146,6 +146,21 @@ An `.json` output extension selects JSON automatically:
 .\codex-doctor.ps1 -Output .\report.json
 ```
 
+## Automation gates
+
+By default, the doctor reports its observations and exits with code `0`. Use `-FailOn` only when a script or CI job needs a deliberately chosen policy gate:
+
+```powershell
+# Exit 1 only for confirmed FAIL checks; JSON remains available on standard output.
+.\codex-doctor.ps1 -Json -FailOn Fail
+
+# Gate on WARN or FAIL, or treat UNKNOWN as requiring review too.
+.\codex-doctor.ps1 -Json -FailOn Warn
+.\codex-doctor.ps1 -Json -FailOn Unknown
+```
+
+`Fail` selects `FAIL`; `Warn` selects `WARN` and `FAIL`; `Unknown` selects `UNKNOWN`, `WARN`, and `FAIL`; `None` is the default. A triggered gate writes one redacted summary to standard error and returns exit code `1`. It still does not execute project commands or repair Windows settings.
+
 ## Issue reports
 
 `-IssueReport` creates Markdown that can be reviewed and pasted into a GitHub issue. It does not open an issue, log in to GitHub, or send data.

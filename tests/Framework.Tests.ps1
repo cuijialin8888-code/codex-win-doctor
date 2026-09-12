@@ -29,6 +29,23 @@ Describe 'Diagnostic framework' {
         (Get-DoctorOverallStatus -Summary $summary) | Should -Be 'HEALTHY WITH WARNINGS'
     }
 
+    It 'selects only the requested gate severity and worse' {
+        $checks = @(
+            (New-DoctorCheck -Id 'test.pass' -Category 'Tests' -Status 'PASS' -Summary 'Pass')
+            (New-DoctorCheck -Id 'test.info' -Category 'Tests' -Status 'INFO' -Summary 'Info')
+            (New-DoctorCheck -Id 'test.unknown' -Category 'Tests' -Status 'UNKNOWN' -Summary 'Unknown')
+            (New-DoctorCheck -Id 'test.warn' -Category 'Tests' -Status 'WARN' -Summary 'Warn')
+            (New-DoctorCheck -Id 'test.fail' -Category 'Tests' -Status 'FAIL' -Summary 'Fail')
+        )
+
+        @(Get-DoctorGateFailure -Checks $checks -FailOn None).Count | Should -Be 0
+        @(Get-DoctorGateFailure -Checks $checks -FailOn Fail).id | Should -Be 'test.fail'
+        @(Get-DoctorGateFailure -Checks $checks -FailOn Warn).id | Should -Be @('test.warn', 'test.fail')
+        @(Get-DoctorGateFailure -Checks $checks -FailOn Unknown).id | Should -Be @(
+            'test.unknown', 'test.warn', 'test.fail'
+        )
+    }
+
     It 'limits recommended next steps' {
         $checks = 1..7 | ForEach-Object {
             New-DoctorCheck -Id ('test.warn.{0}' -f $_) -Category 'Tests' -Status 'WARN' `

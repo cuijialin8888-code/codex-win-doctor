@@ -146,6 +146,21 @@ $report.checks | Where-Object status -In WARN, FAIL, UNKNOWN
 .\codex-doctor.ps1 -Output .\report.json
 ```
 
+## 自动化门槛
+
+默认情况下，Doctor 只报告观察结果并返回退出码 `0`。只有在脚本或 CI 需要明确的验收门槛时才使用 `-FailOn`：
+
+```powershell
+# 仅在存在确认的 FAIL 时返回 1；JSON 仍输出到标准输出。
+.\codex-doctor.ps1 -Json -FailOn Fail
+
+# 对 WARN/FAIL 设门槛，或将 UNKNOWN 也视为需要人工复核。
+.\codex-doctor.ps1 -Json -FailOn Warn
+.\codex-doctor.ps1 -Json -FailOn Unknown
+```
+
+`Fail` 只选择 `FAIL`；`Warn` 选择 `WARN` 和 `FAIL`；`Unknown` 选择 `UNKNOWN`、`WARN` 和 `FAIL`；`None` 为默认值。门槛触发时会向标准错误输出一条已脱敏的摘要并返回退出码 `1`，仍不会执行项目命令或修复 Windows 设置。
+
 ## Issue Report
 
 `-IssueReport` 生成可检查、可复制的 Markdown。它不会替用户登录 GitHub、创建 Issue 或发送数据。

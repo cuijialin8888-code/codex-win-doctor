@@ -16,6 +16,10 @@ Codex Windows Doctor is designed to keep diagnostics local, but a report can sti
 4. Confirm that no API key, token, cookie, credential, authorization header, private URL, or authentication/configuration file content is present.
 5. Share the shortened report only after the manual review is complete.
 
+## Automation policy gates
+
+Use `-FailOn Fail`, `-FailOn Warn`, or `-FailOn Unknown` only when a local script or CI job needs a deliberate exit-code policy. `Fail` gates on `FAIL`; `Warn` includes `WARN` and `FAIL`; `Unknown` includes `UNKNOWN`, `WARN`, and `FAIL`. The default `None` remains informational. A gate does not execute extra commands, repair Windows settings, or upload the report.
+
 ## Review checklist
 
 - [ ] The report does not contain secrets, cookies, bearer values, or credential material.

@@ -97,6 +97,32 @@ function Get-DoctorOverallStatus {
     return 'HEALTHY'
 }
 
+function Get-DoctorGateFailure {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $true)]
+        [AllowEmptyCollection()]
+        [object[]]$Checks,
+
+        [Parameter(Mandatory = $false)]
+        [ValidateSet('None', 'Fail', 'Warn', 'Unknown')]
+        [string]$FailOn = 'None'
+    )
+
+    $statuses = @(switch ($FailOn) {
+        'Fail' { @('FAIL') }
+        'Warn' { @('FAIL', 'WARN') }
+        'Unknown' { @('FAIL', 'WARN', 'UNKNOWN') }
+        default { @() }
+    })
+
+    if ($statuses.Count -eq 0) {
+        return @()
+    }
+
+    return @($Checks | Where-Object { $statuses -contains [string]$_.status })
+}
+
 function Get-DoctorRecommendation {
     [CmdletBinding()]
     param(
