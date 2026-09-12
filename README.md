@@ -129,7 +129,7 @@ The trust promises above apply to every normal run: `codex-doctor.ps1` makes no 
 
 Redaction recognizes common secret names, every documented GitHub token prefix family, bearer headers, API-key query parameters, JWT-like strings, and OpenAI-style secret prefixes. It is defense in depth, not a guarantee: **always review a report before posting it publicly**.
 
-See [SECURITY.md](SECURITY.md) for the security policy.
+See [SECURITY.md](SECURITY.md) for the security policy. Before sharing a report, follow the [report review guide](docs/troubleshooting/report-review.md).
 
 ## JSON reports
 
@@ -167,6 +167,7 @@ For an interpretation question, choose [Diagnostic help request](https://github.
 - [ripgrep resolves but returns Access Denied](docs/troubleshooting/rg-access-denied.md)
 - [Codex desktop package state](docs/troubleshooting/codex-desktop-package.md)
 - [CODEX_HOME diagnostics](docs/troubleshooting/codex-home.md)
+- [Report review and safe sharing](docs/troubleshooting/report-review.md)
 
 ## Roadmap
 

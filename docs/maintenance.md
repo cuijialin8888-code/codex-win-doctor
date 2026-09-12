@@ -27,7 +27,12 @@ Keep maintenance evidence-driven and small. This project is a read-only diagnost
 - Preserve read-only behavior, no telemetry, no API-key requirement, and no automatic PATH, registry, WSL, AppX/MSIX, or policy changes.
 - Do not create activity-only commits, artificial issues, or unverified compatibility claims.
 
+## Report review maintenance
+
+- Keep the English and Chinese report-review guides aligned with `-Json`, `-IssueReport`, built-in redaction, and the privacy boundary.
+- When report fields or redaction behavior changes, update both README files, add focused privacy coverage, and review a sample output before release.
 ## Review log
 
 - 2026-08-17: verified the public `main` branch, recent GitHub Actions runs, and open issue/PR queues; no follow-up was required.
 - 2026-09-12: reviewed public `main`, open Issues/PRs, and recent Actions; no open Issues/PRs were present, and the latest main-branch CI run (`34034505948`) completed successfully.
+- 2026-09-12: expanded the report-review maintenance path and added bilingual guidance for safe sharing.

@@ -7,6 +7,7 @@ All notable changes to this project are documented here. The format is based on 
 ### Added
 
 - Repository-level maintainer instructions for safe, PowerShell 5.1-compatible contributions.
+- A report-review guide in English and Chinese, covering local review and safe sharing of JSON and Markdown diagnostics.
 
 ### Changed
 

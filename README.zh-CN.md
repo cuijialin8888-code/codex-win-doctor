@@ -129,7 +129,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\codex-doctor.ps1
 
 脱敏层识别常见密钥名称、GitHub 官方各类 Token 前缀、Bearer Header、API Key 查询参数、JWT 形态和 OpenAI 风格密钥前缀。但自动脱敏不是绝对保证：**公开粘贴报告前仍应人工检查。**
 
-详见 [SECURITY.md](SECURITY.md)。
+详见 [SECURITY.md](SECURITY.md)。 公开分享报告前，请先阅读[报告审阅与安全分享指南](docs/troubleshooting/report-review.zh-CN.md)。
 
 ## JSON 报告
 
@@ -167,6 +167,7 @@ $report.checks | Where-Object status -In WARN, FAIL, UNKNOWN
 - [rg 能解析但 Access Denied](docs/troubleshooting/rg-access-denied.md)
 - [Codex Desktop 包状态](docs/troubleshooting/codex-desktop-package.md)
 - [CODEX_HOME 诊断](docs/troubleshooting/codex-home.md)
+- [报告审阅与安全分享](docs/troubleshooting/report-review.zh-CN.md)
 
 ## Roadmap
 
