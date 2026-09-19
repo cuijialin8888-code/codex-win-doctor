@@ -36,3 +36,5 @@ Keep maintenance evidence-driven and small. This project is a read-only diagnost
 - 2026-08-17: verified the public `main` branch, recent GitHub Actions runs, and open issue/PR queues; no follow-up was required.
 - 2026-09-12: reviewed public `main`, open Issues/PRs, and recent Actions; no open Issues/PRs were present, and the latest main-branch CI run (`34034505948`) completed successfully.
 - 2026-09-12: expanded the report-review maintenance path and added bilingual guidance for safe sharing.
+
+- 2026-09-19: reviewed public `main`, open Issues/PRs, and recent Actions; no open Issues/PRs were present. The latest main-branch CI run (`34676959464`) completed successfully after the earlier policy-gate failures (`34676877473` and `34676789801`) were superseded by the child-process validation fix.
