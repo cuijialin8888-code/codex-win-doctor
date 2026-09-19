@@ -57,6 +57,78 @@ function ConvertTo-DoctorJson {
     return ($safeReport | ConvertTo-Json -Depth 12)
 }
 
+function ConvertTo-DoctorSarif {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $true)]
+        [object]$Report
+    )
+
+    $safeReport = ConvertTo-DoctorSafeData -InputObject $Report
+    $levelMap = @{
+        FAIL    = 'error'
+        WARN    = 'warning'
+        UNKNOWN = 'warning'
+        INFO    = 'note'
+    }
+    $rules = @()
+    $results = @()
+    foreach ($check in @($safeReport.checks | Where-Object { $_.status -ne 'PASS' })) {
+        $level = $levelMap[[string]$check.status]
+        if ([string]::IsNullOrWhiteSpace($level)) {
+            $level = 'note'
+        }
+        $rules += [ordered]@{
+                id = [string]$check.id
+                name = [string]$check.id
+                shortDescription = [ordered]@{ text = [string]$check.summary }
+                fullDescription = [ordered]@{ text = [string]$check.details }
+                defaultConfiguration = [ordered]@{ level = $level }
+            }
+        $results += [ordered]@{
+                ruleId = [string]$check.id
+                level = $level
+                message = [ordered]@{ text = [string]$check.summary }
+                properties = [ordered]@{
+                    status = [string]$check.status
+                    category = [string]$check.category
+                    details = [string]$check.details
+                    recommendation = @($check.recommendation)
+                }
+            }
+    }
+
+    $payload = [ordered]@{
+        '$schema' = 'https://json.schemastore.org/sarif-2.1.0.json'
+        version = '2.1.0'
+        runs = @(
+            [ordered]@{
+                tool = [ordered]@{
+                    driver = [ordered]@{
+                        name = [string]$safeReport.tool.name
+                        version = [string]$safeReport.tool.version
+                        informationUri = 'https://github.com/cuijialin8888-code/codex-win-doctor'
+                        rules = @($rules)
+                    }
+                }
+                invocations = @(
+                    [ordered]@{
+                        executionSuccessful = $true
+                        properties = [ordered]@{ readOnly = $true; networkRequests = $false }
+                    }
+                )
+                results = @($results)
+                properties = [ordered]@{
+                    overall = [string]$safeReport.overall
+                    redaction = [string]$safeReport.privacy.redaction
+                    telemetry = [string]$safeReport.privacy.telemetry
+                }
+            }
+        )
+    }
+    return ($payload | ConvertTo-Json -Depth 15)
+}
+
 function ConvertTo-DoctorIssueReport {
     [CmdletBinding()]
     param(

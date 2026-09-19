@@ -146,6 +146,14 @@ An `.json` output extension selects JSON automatically:
 .\codex-doctor.ps1 -Output .\report.json
 ```
 
+For CI systems that consume code-scanning artifacts, `-Sarif` emits SARIF
+2.1.0. It contains non-PASS checks as findings, preserves the redacted
+recommendations, and marks the invocation as read-only:
+
+```powershell
+.\codex-doctor.ps1 -Sarif -Output .\doctor.sarif
+```
+
 ## Automation gates
 
 By default, the doctor reports its observations and exits with code `0`. Use `-FailOn` only when a script or CI job needs a deliberately chosen policy gate:

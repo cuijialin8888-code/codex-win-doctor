@@ -8,6 +8,9 @@ param(
     [switch]$IssueReport,
 
     [Parameter(Mandatory = $false)]
+    [switch]$Sarif,
+
+    [Parameter(Mandatory = $false)]
     [ValidateSet('None', 'Fail', 'Warn', 'Unknown')]
     [string]$FailOn = 'None',
 
@@ -19,8 +22,13 @@ param(
 Set-StrictMode -Version 2.0
 $ErrorActionPreference = 'Stop'
 
-if ($Json -and $IssueReport) {
-    throw 'Choose either -Json or -IssueReport, not both.'
+$selectedFormats = @(
+    if ($Json) { 'Json' }
+    if ($IssueReport) { 'IssueReport' }
+    if ($Sarif) { 'Sarif' }
+)
+if ($selectedFormats.Count -gt 1) {
+    throw 'Choose only one of -Json, -IssueReport, or -Sarif.'
 }
 
 $sourceFiles = @(
@@ -47,6 +55,9 @@ if ($Json) {
 elseif ($IssueReport) {
     $format = 'IssueReport'
 }
+elseif ($Sarif) {
+    $format = 'Sarif'
+}
 elseif ($Output) {
     $extension = [System.IO.Path]::GetExtension($Output)
     if ($extension -ieq '.json') {
@@ -54,6 +65,9 @@ elseif ($Output) {
     }
     elseif ($extension -ieq '.md') {
         $format = 'IssueReport'
+    }
+    elseif ($extension -ieq '.sarif') {
+        $format = 'Sarif'
     }
 }
 
@@ -66,6 +80,9 @@ switch ($format) {
     }
     'IssueReport' {
         $rendered = ConvertTo-DoctorIssueReport -Report $report
+    }
+    'Sarif' {
+        $rendered = ConvertTo-DoctorSarif -Report $report
     }
     default {
         $rendered = Format-DoctorConsole -Report $report

@@ -40,6 +40,19 @@ Describe 'Machine-readable output' {
 
         $json | Should -Not -Match ([regex]::Escape($fakeToken))
     }
+
+    It 'produces SARIF with read-only invocation metadata' {
+        $checks = @(
+            New-DoctorCheck -Id 'test.sarif' -Category 'Tests' -Status 'WARN' -Summary 'SARIF warning'
+        )
+        $report = New-DoctorReport -Platform (Get-TestPlatform) -Checks $checks
+        $sarif = ConvertTo-DoctorSarif -Report $report | ConvertFrom-Json
+
+        $sarif.version | Should -Be '2.1.0'
+        $sarif.runs[0].tool.driver.name | Should -Be 'Codex Windows Doctor'
+        $sarif.runs[0].invocations[0].properties.readOnly | Should -BeTrue
+        $sarif.runs[0].results[0].ruleId | Should -Be 'test.sarif'
+    }
 }
 
 Describe 'Issue report output' {

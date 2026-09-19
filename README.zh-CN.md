@@ -146,6 +146,12 @@ $report.checks | Where-Object status -In WARN, FAIL, UNKNOWN
 .\codex-doctor.ps1 -Output .\report.json
 ```
 
+需要接入代码扫描消费端时，可使用 `-Sarif` 输出 SARIF 2.1.0；结果只包含非 PASS 检查，保留脱敏后的建议，并标记执行为只读：
+
+```powershell
+.\codex-doctor.ps1 -Sarif -Output .\doctor.sarif
+```
+
 ## 自动化门槛
 
 默认情况下，Doctor 只报告观察结果并返回退出码 `0`。只有在脚本或 CI 需要明确的验收门槛时才使用 `-FailOn`：
