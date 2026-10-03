@@ -210,3 +210,8 @@ This project is an independent community project and is not affiliated with or e
 ## 许可证
 
 [MIT](LICENSE) © 2026 cuijialin8888-code
+
+## 只运行指定检查组
+
+`main` 分支新增（尚未发布版本）：`-CheckGroup` 限制实际执行的检查组，例如 `./codex-doctor.ps1 -Json -CheckGroup codex.cli,tools.version-control`。不指定时保留原有完整诊断。未知组名会在执行任何检查组前报错，重复组名只执行一次；报告及 `-FailOn` 只针对选中结果，平台元数据仍会采集。可选组名见英文 README，可避免执行不相关的文件系统临时写入探测。
+

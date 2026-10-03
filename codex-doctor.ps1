@@ -15,6 +15,9 @@ param(
     [string]$FailOn = 'None',
 
     [Parameter(Mandatory = $false)]
+    [string[]]$CheckGroup = @(),
+
+    [Parameter(Mandatory = $false)]
     [ValidateNotNullOrEmpty()]
     [string]$Output
 )
@@ -72,7 +75,7 @@ elseif ($Output) {
 }
 
 Write-Verbose 'Running local, read-only Codex environment checks.'
-$report = Invoke-CodexDoctor -WorkspacePath (Get-Location).Path -Verbose:$VerbosePreference
+$report = Invoke-CodexDoctor -WorkspacePath (Get-Location).Path -CheckGroup $CheckGroup -Verbose:$VerbosePreference
 
 switch ($format) {
     'Json' {

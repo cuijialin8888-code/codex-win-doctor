@@ -35,7 +35,10 @@ function Invoke-CodexDoctor {
     param(
         [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
-        [string]$WorkspacePath
+        [string]$WorkspacePath,
+
+        [Parameter(Mandatory = $false)]
+        [string[]]$CheckGroup = @()
     )
 
     $platform = Get-DoctorPlatformInfo
@@ -56,6 +59,14 @@ function Invoke-CodexDoctor {
         [pscustomobject]@{ Id = 'windows.wsl'; Category = 'Windows features'; Action = { Test-Wsl } },
         [pscustomobject]@{ Id = 'windows.long-paths'; Category = 'Windows features'; Action = { Test-WindowsLongPath } }
     )
+
+    if ($CheckGroup.Count -gt 0) {
+        $unknownGroups = @($CheckGroup | Where-Object { $_ -notin $groups.Id })
+        if ($unknownGroups.Count -gt 0) {
+            throw (ConvertTo-DoctorSafeText -Text ('Unknown check group: {0}. Available groups: {1}' -f ($unknownGroups -join ', '), ($groups.Id -join ', ')))
+        }
+        $groups = @($groups | Where-Object { $_.Id -in $CheckGroup })
+    }
 
     foreach ($group in $groups) {
         Write-Verbose ('Running check group: {0}' -f $group.Id)

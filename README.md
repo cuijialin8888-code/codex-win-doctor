@@ -214,3 +214,14 @@ This project is an independent community project and is not affiliated with or e
 ## License
 
 [MIT](LICENSE) © 2026 cuijialin8888-code
+
+## Run only selected check groups
+
+On `main` (unreleased), `-CheckGroup` limits execution to named check groups. With no selection, the existing full diagnostic remains the default. Unknown names fail before any check group runs; duplicate names run once. Reports and `-FailOn` apply to the selected checks. Platform metadata is still collected for the report.
+
+```powershell
+.\codex-doctor.ps1 -Json -CheckGroup codex.cli,tools.version-control
+```
+
+Available groups: `windows.environment`, `powershell.execution-policy`, `codex.cli`, `codex.desktop`, `shell.environment`, `tools.version-control`, `dependencies.optional`, `archive.tools`, `tools.ripgrep`, `codex.home`, `filesystem.write`, `path.health`, `windows.wsl`, `windows.long-paths`. This can avoid unrelated probes such as the disposable filesystem-write check.
+

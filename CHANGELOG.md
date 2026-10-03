@@ -4,6 +4,8 @@ All notable changes to this project are documented here. The format is based on 
 
 ## [Unreleased]
 
+- Add `-CheckGroup` to execute only explicitly selected diagnostic groups, rejecting unknown names and deduplicating requests.
+
 ### Added
 
 - Repository-level maintainer instructions for safe, PowerShell 5.1-compatible contributions.
